@@ -18,7 +18,7 @@ def read_root():
 def create_root():
     return{"hello":"post"}
 
-@app.put
+@app.put("/")
 def update_root():
     return{"hello":"put"}
 
