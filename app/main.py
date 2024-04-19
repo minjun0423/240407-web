@@ -3,21 +3,19 @@ from typing import Union
 from fastapi import FastAPI
 from pydantic import BaseModel
 
+import requests
+
 app = FastAPI()
 
-class Item(BaseModel):
-    name: str
-    price: float
-    is_offer: Union[bool, None] = None
     
 @app.get("/")
 def read_root():
-    return {"Hello": "World"}
+    URL = "https://bigdata.kepco.co.kr/openapi/v1/powerUsage/industryType.do?year=2020&month=11&metroCd=11&cityCd=12&apiKey=69viVTSCMlJ552B9O243czcn718eth0C5691acbA&returnType=json"
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Union[str, None] = None):
-    return {"item_id": item_id, "q": q}
+    contents = requsts.get(URL).text
 
-@app.post("/items/{item_id}")
-def update_item(item_id: int, item: Item):
-    return{"item_name": item.name, "item_id": item_id}
+    return {"message": contents}
+
+@app.get("/home")
+def home():
+    return {"message": "home!"}
